@@ -73,7 +73,11 @@
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
 
 <!--        <dependency>-->
 <!--            <groupId>org.eclipse.platform</groupId>-->
@@ -87,11 +91,11 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <mainClass>org.dusg.clipboard.tools.Main</mainClass>-->
-<!--                        </manifest>-->
-<!--                    </archive>-->
+                    <archive>
+                        <manifest>
+                            <mainClass>org.dusg.jechart.Main</mainClass>
+                        </manifest>
+                    </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>

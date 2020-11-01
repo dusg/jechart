@@ -1,16 +1,20 @@
 package org.dusg.jechart;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.widgets.Composite;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class JEChart {
     private static Path extraPath;
@@ -24,19 +28,30 @@ public class JEChart {
     }
 
     static private void extraResources() {
-        ProcessBuilder processBuilder = new ProcessBuilder();
         try {
             extraPath = Files.createTempDirectory("jechart");
             String jarFile = JEChart.class.getProtectionDomain().getCodeSource().getLocation().getPath();
             if (Files.isDirectory(Paths.get(jarFile))) {
+                // this for debug
                 extraPath = Paths.get(jarFile);
                 return;
             }
-            processBuilder.directory(extraPath.toFile());
-            processBuilder.command("jar", "xf", jarFile, "web");
-            Process process = processBuilder.start();
-            process.waitFor();
-        } catch (IOException | InterruptedException e) {
+            JarFile jar = new JarFile(jarFile);
+            Enumeration<JarEntry> enumEntries = jar.entries();
+            while (enumEntries.hasMoreElements()) {
+                JarEntry jarEntry = enumEntries.nextElement();
+                if (!jarEntry.getName().startsWith("web")) {
+                    continue;
+                }
+                Path dstFile = Paths.get(extraPath.toString(), jarEntry.getName());
+
+                if (jarEntry.isDirectory()) {
+                    Files.createDirectories(dstFile);
+                    continue;
+                }
+                FileUtils.copyInputStreamToFile(jar.getInputStream(jarEntry), dstFile.toFile());
+            }
+        } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
         }
