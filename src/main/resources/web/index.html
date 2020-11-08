@@ -5,11 +5,12 @@
     <title>Title</title>
     <script src="echarts/echarts.min.js"></script>
 </head>
-<body>
+<body id="body">
 <div id="main"></div>
 <script type="text/javascript">
     // function getOption(){}
     let chart = echarts.init(document.getElementById('main'));
+    let body = document.getElementById('body')
     // chart.setOption(getOption());
 
     window.onload = () => {
@@ -35,6 +36,7 @@
             setSize(window.innerWidth - 20, window.innerHeight - 20)
         }
         window.onresize(undefined)
+        chart.getOption()
 
         // chart.setOption(getOption());
     }

@@ -6,12 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="clipboard.tools" />
         <module name="jechart" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="clipboard.tools" target="1.8" />
       <module name="jechart" target="11" />
     </bytecodeTargetLevel>
   </component>

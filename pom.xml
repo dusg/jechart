@@ -2,114 +2,145 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dusg</groupId>
-    <artifactId>jechart</artifactId>
-    <version>1.0</version>
+  <groupId>org.dusg</groupId>
+  <artifactId>jechart</artifactId>
+<!--  <packaging>pom</packaging>-->
+  <version>1.0</version>
 
-    <properties>
-        <swt.version>3.115.0</swt.version>
+  <properties>
+    <swt.version>3.115.0</swt.version>
+    <swt.os>org.eclipse.swt.gtk.linux.x86_64</swt.os>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+  <profiles>
+    <profile>
+      <id>windows os</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <swt.os>org.eclipse.swt.win32.win32.x86_64</swt.os>
+        <swt.os.suffix>win32.win32.x86_64</swt.os.suffix>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux os</id>
+      <activation>
+        <os>
+          <family>unix</family>
+        </os>
+      </activation>
+      <properties>
         <swt.os>org.eclipse.swt.gtk.linux.x86_64</swt.os>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-    <profiles>
-        <profile>
-            <id>windows os</id>
-            <activation><os><family>windows</family></os></activation>
-            <properties>
-                <swt.os>org.eclipse.swt.win32.win32.x86_64</swt.os>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux os</id>
-            <activation><os><family>unix</family></os></activation>
-            <properties>
-                <swt.os>org.eclipse.swt.gtk.linux.x86_64</swt.os>
-            </properties>
-        </profile>
-        <profile>
-            <id>macos</id>
-            <activation><os><family>mac</family></os></activation>
-            <properties>
-                <swt.os>org.eclipse.swt.cocoa.macosx.x86_64</swt.os>
-            </properties>
-        </profile>
-    </profiles>
-    <repositories>
-        <repository>
-            <id>maven-eclipse-repo</id>
-            <url>http://maven-eclipse.github.io/maven</url>
-        </repository>
-    </repositories>
+        <swt.os.suffix>gtk.linux.x86_64</swt.os.suffix>
+      </properties>
+    </profile>
+    <profile>
+      <id>macos</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <swt.os>org.eclipse.swt.cocoa.macosx.x86_64</swt.os>
+        <swt.os.suffix>cocoa.macosx.x86_64</swt.os.suffix>
+      </properties>
+    </profile>
+  </profiles>
+  <repositories>
+    <repository>
+      <id>maven-eclipse-repo</id>
+      <url>http://maven-eclipse.github.io/maven</url>
+    </repository>
+  </repositories>
 
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt -->
-        <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.swt</artifactId>
-            <version>${swt.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt.gtk.linux.x86_64 -->
-        <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>${swt.os}</artifactId>
-            <version>${swt.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.eclipse.platform</groupId>
-                    <artifactId>org.eclipse.swt.gtk.linux.aarch64</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.platform</groupId>
-                    <artifactId>org.eclipse.swt.gtk.linux.arm</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.6</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.8.0</version>
-        </dependency>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt -->
+    <dependency>
+      <groupId>org.eclipse.platform</groupId>
+      <artifactId>org.eclipse.swt</artifactId>
+      <version>${swt.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt.browser.chromium.cocoa.macosx.x86_64 -->
+<!--    <dependency>-->
+<!--      <groupId>org.eclipse.platform</groupId>-->
+<!--      <artifactId>org.eclipse.swt.browser.chromium.${swt.os.suffix}</artifactId>-->
+<!--      <version>3.115.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>cef</groupId>-->
+<!--      <artifactId>com.make.chromium.cef</artifactId>-->
+<!--      <version>0.4.0</version>-->
+<!--      <scope>system</scope>-->
+<!--      <systemPath>${project.basedir}/lib/com.make.chromium.cef.cocoa.macosx.x86_64_0.4.0.202005172227.jar</systemPath>-->
+<!--    </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>org.eclipse.platform</groupId>-->
-<!--            <artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>-->
-<!--            <version>${swt.version}</version>-->
-<!--        </dependency>-->
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>org.dusg.jechart.Main</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+
+    <!-- https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt.gtk.linux.x86_64 -->
+    <dependency>
+      <groupId>org.eclipse.platform</groupId>
+      <artifactId>${swt.os}</artifactId>
+      <version>${swt.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.eclipse.platform</groupId>
+          <artifactId>org.eclipse.swt.gtk.linux.aarch64</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.eclipse.platform</groupId>
+          <artifactId>org.eclipse.swt.gtk.linux.arm</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.8.0</version>
+    </dependency>
+
+    <!--        <dependency>-->
+    <!--            <groupId>org.eclipse.platform</groupId>-->
+    <!--            <artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>-->
+    <!--            <version>${swt.version}</version>-->
+    <!--        </dependency>-->
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.dusg.jechart.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>package</phase> <!-- bind to the packaging phase -->
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

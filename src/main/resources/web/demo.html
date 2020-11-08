@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body id="body" style="height: 100%; margin: 0; ">
+<div id="main" style="height: 100%"></div>
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>-->
+<!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>-->
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>-->
+<script src="echarts/echarts.min.js"></script>
+
+<script type="text/javascript">
+    // function getOption(){}
+    let chart = echarts.init(document.getElementById('main'));
+    // chart.setOption(getOption());
+
+    window.onload = () => {
+        const option = {
+            'series': {
+                'data': [{'name': '视频广告', 'value': 235,}, {
+                    'name': '联盟广告',
+                    'value': 274,
+                }, {'name': '邮件营销', 'value': 310,}, {'name': '直接访问', 'value': 335,}, {'name': '搜索引擎', 'value': 400,},],
+                'roseType': 'angle',
+                'name': '访问来源',
+                'itemStyle': {
+                    'normal': {
+                        'shadowOffsetX': 0.0,
+                        'shadowOffsetY': 0.0,
+                        'shadowBlur': 20.0,
+                        'shadowColor': 'rgba(0,0,0,0.5)',
+                    },
+                },
+                'type': 'pie',
+                'radius': '55%',
+            },
+        }
+        // window.onresize = function (size) {
+        //     setSize(window.innerWidth - 20, window.innerHeight - 20)
+        // }
+        // window.onresize(undefined)
+        chart.setOption(option)
+        document.getElementById('body').style.background = '#2c343c'
+        // chart.setOption(getOption());
+    }
+    window.onload(undefined)
+
+    function setSize(width, height) {
+        const div = document.getElementById('main');
+        div.style.width = width + 'px';
+        div.style.height = height + 'px';
+        chart.resize();
+    }
+</script>
+</body>
+</html>
