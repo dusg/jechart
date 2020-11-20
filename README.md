@@ -12,3 +12,6 @@ echart for java
 [SnippetPie03](src/main/java/org/dusg/jechart/snapshot/SnippetPie03.java)
 ![](img/SnippetPie03.png)
 
+[DataLoading01](src/main/java/org/dusg/jechart/snapshot/DataLoading01.java)
+![](img/DataLoading01.png)
+

@@ -141,6 +141,18 @@ public class JEChart {
         applyOption();
     }
 
+    public void showLoading() {
+        execute(()-> {
+            browser.execute("chart.showLoading();");
+        });
+    }
+
+    public void hideLoading() {
+        execute(() -> {
+            browser.execute("chart.hideLoading();");
+        });
+    }
+
     protected void execute(Runnable runnable) {
         if (isLoadComplete()) {
             runnable.run();

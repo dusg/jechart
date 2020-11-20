@@ -64,8 +64,6 @@ public abstract class AbstractChart extends JEChart {
         return style;
     }
     protected Map<String, Object> getNormalStyle() {
-        Map<String, Object> style = (Map<String, Object>) getItemStyle().computeIfAbsent("normal",
-                k -> new HashMap<String, Object>());
-        return style;
+        return getItemStyle();
     }
 }
